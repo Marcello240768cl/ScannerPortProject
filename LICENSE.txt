@@ -1,0 +1,4 @@
+This File created in php ,uses the compiler php downloadble from php.net and has a license free only
+for use but not for pourpose.
+Producer :PHP PROGRAMMER Piermarcello Piazza;
+Site web exe file:https://trenetcl.altervista.org;
