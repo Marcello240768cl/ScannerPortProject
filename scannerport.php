@@ -6,8 +6,11 @@ $timeout = 30;
 
 //Instance of array of port in variable $ports
 $ports=array();
-//if((isset($_POST['Host']))&&(isset($_POST['ports_']))){
-$host = $argv[1];//First argument of called file
+if((count($argv))!=3) echo "Format : ipportscan host ports_separated_by_commas".PHP_EOL;
+$host = $argv[1];$ip = gethostbyname($host);
+if(!filter_var($ip, FILTER_VALIDATE_IP)) {echo $ip." is a non format ip address".PHP_EOL;return;}
+
+//First argument of called file
 $ports = explode(',',$argv[2]);//second argument of called file
 $len=count($ports);
 //code scanning ports
@@ -17,7 +20,7 @@ for ($i=0; $i<$len; $i++)
   
 $time_start = microtime(true);
 //open a tcp connection with host on port 
-$connection=@fsockopen("tcp://".$host, $ports[$i], $errno, $errstr, $timeout);
+$connection=@fsockopen("tcp://".$ip, $ports[$i], $errno, $errstr, $timeout);
 if (is_resource($connection))
 { 
 
@@ -43,7 +46,7 @@ if (is_resource($connection))
 }else {
 $time_start1 = microtime(true);
 //open a udp connection to host on ports
- $connection1 = @fsockopen("udp://".$host, $ports[$i], $errno, $errstr, $timeout);
+ $connection1 = @fsockopen("udp://".$ip, $ports[$i], $errno, $errstr, $timeout);
 
  
   
